@@ -1,7 +1,9 @@
 declare class SimpleGPIO {
   constructor()
 
-  read(pin: number): number
+  setupInput(pin: number)
+  setupOuput(pin: number)
+  read(pin: number): boolean
   write(pin: number, value: boolean): void
 }
 

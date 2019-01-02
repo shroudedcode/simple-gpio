@@ -12,6 +12,8 @@ public:
 private:
   static Napi::FunctionReference constructor;
 
+  void setupInput(const Napi::CallbackInfo &info);
+  void setupOutput(const Napi::CallbackInfo &info);
   Napi::Value read(const Napi::CallbackInfo &info);
   void write(const Napi::CallbackInfo &info);
 

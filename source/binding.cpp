@@ -6,6 +6,8 @@ Napi::FunctionReference SimpleGPIO::constructor;
 void SimpleGPIO::Init(Napi::Env env, Napi::Object exports)
 {
   Napi::Function func = DefineClass(env, "SimpleGPIO", {
+    InstanceMethod("setupInput", &SimpleGPIO::setupInput),
+    InstanceMethod("setupOutput", &SimpleGPIO::setupOutput),
     InstanceMethod("write", &SimpleGPIO::write),
     InstanceMethod("read", &SimpleGPIO::read)
   });
@@ -24,6 +26,18 @@ SimpleGPIO::SimpleGPIO(const Napi::CallbackInfo &info) : Napi::ObjectWrap<Simple
 }
 
 SimpleGPIO::~SimpleGPIO() {}
+
+void SimpleGPIO::setupInput(const Napi::CallbackInfo &info)
+{
+  int pin = info[0].ToNumber();
+  pinMode(pin, INPUT);
+}
+
+void SimpleGPIO::setupOutput(const Napi::CallbackInfo &info)
+{
+  int pin = info[0].ToNumber();
+  pinMode(pin, OUTPUT);
+}
 
 Napi::Value SimpleGPIO::read(const Napi::CallbackInfo &info)
 {
